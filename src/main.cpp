@@ -48,35 +48,6 @@ void BlinkingTask(void *pv) {
     }
 }
 
-void listDir(const char *dirname, uint8_t levels) {
-    Serial.printf("Listing directory: %s\n", dirname);
-
-    File root = LittleFS.open(dirname);
-    if (!root) {
-        Serial.println("Failed to open directory");
-        return;
-    }
-    if (!root.isDirectory()) {
-        Serial.println("Not a directory");
-        return;
-    }
-
-    File file = root.openNextFile();
-    while (file) {
-        if (file.isDirectory()) {
-            Serial.print("  DIR : ");
-            Serial.println(file.name());
-            if (levels) listDir(file.name(), levels - 1);
-        } else {
-            Serial.print("  FILE: ");
-            Serial.print(file.name());
-            Serial.print("\tSIZE: ");
-            Serial.println(file.size());
-        }
-        file = root.openNextFile();
-    }
-}
-
 void setup() {
     Serial.begin(9600);
     pinMode(ledPin, OUTPUT);
@@ -89,8 +60,6 @@ void setup() {
     else {
         Serial.println("LittleFS mounted");
     }
-
-    listDir("/", 0);
 
     char wifiName[32];
     char wifiPassword[32];
