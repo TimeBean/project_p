@@ -1,0 +1,10 @@
+body {
+    background-color: rgb(12, 12, 12);
+}
+
+.regular-text {
+    color: rgb(240, 240, 240);
+    font-family: "Libre Baskerville", serif;
+    font-weight: 400;
+    font-style: normal;
+}
